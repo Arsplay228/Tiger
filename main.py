@@ -4,14 +4,14 @@ class Tiger:
     def __init__(self):
         self.state = "hunting"
         self.lucky = 0.5
-        self.x = 0, 0
-        self.y = 0, 0
+        self.x = 0
+        self.y = 0
 
 class Rabbit:
     def __init__(self, x, y):
         self.x = x
         self.y = y
-        is_catched = False
+        self.is_catched = False
 
     def to_catch(self):
         self.is_catched = True
@@ -19,9 +19,29 @@ class Rabbit:
 class Field:
     def __init__(self, tiger, rabbits):
         self.size = 5
-        grid = []
+        self.tiger = tiger
+        self.rabbits = rabbits
+        self.grid = []
+
         for i in range(5):
             row = []
             for i in range(5):
                 row.append("*")
-            grid.append(row)
+            self.grid.append(row)
+
+    def display(self):
+        self.grid[self.tiger.x][self.tiger.y] = "T"
+        for rabbit in self.rabbits:
+            if not rabbit.is_catched:
+                self.grid[rabbit.x][rabbit.y] = "З"
+        print(self.grid)
+
+class Game:
+    def __init__(self):
+        self.tiger = Tiger()
+        self.rabbit_first = Rabbit(random.randint(1, 4), random.randint(1, 4))
+        self.rabbit_second = Rabbit(random.randint(1, 4), random.randint(1, 4))
+        self.field = Field(self.tiger, [self.rabbit_first, self.rabbit_second])
+        self.field.display()
+
+Game()
