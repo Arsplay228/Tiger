@@ -11,7 +11,7 @@ class Tiger:
         self.x += random.choice([-1, 0, 1])
         self.y += random.choice([-1, 0, 1])
         self.x = max(0, min(self.x, 4))
-        self.y = max(0, min(self.x, 4))
+        self.y = max(0, min(self.y, 4))
         print(self.x, self.y)
 
     def dispatch_mode(self):
@@ -34,10 +34,14 @@ class Field:
         self.tiger = tiger
         self.rabbits = rabbits
         self.grid = []
+        self.update_display()
+
+    def update_display(self):
+        self.grid = []
 
         for i in range(5):
             row = []
-            for i in range(5):
+            for j in range(5):
                 row.append("*")
             self.grid.append(row)
 
@@ -64,6 +68,7 @@ class Game:
     def game_loop(self):
         while self.tiger.state != "Go home":
             self.tiger.move_randomly()
+            self.field.update_display()
             self.field.display()
 
 Game()
