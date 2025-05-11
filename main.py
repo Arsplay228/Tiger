@@ -26,6 +26,25 @@ class Tiger:
         if self.state == "attack":
             print("Тигр перешёл в состояние атаки!")
 
+            if random.random() < self.lucky:
+                for rabbit in list_rabbits:
+                    if self.is_near_rabbit(rabbit):
+                        rabbit.to_catch()
+                print("Тигр поймал кролика!")
+
+                self.state = "Go home"
+            else:
+                print("Тигр промахнулся!")
+                self.x = 0
+                self.y = 0
+                self.state = "hunting"
+
+        if self.state == "Go home":
+            self.x = 0
+            self.y = 0
+
+
+
 
     def is_near_rabbit(self, rabbit):
         return abs(self.x - rabbit.x) <= 1 and abs(self.y - rabbit.y) <= 1
