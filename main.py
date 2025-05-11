@@ -1,4 +1,5 @@
 import random
+import time
 
 class Tiger:
     def __init__(self):
@@ -66,6 +67,8 @@ class Field:
             for cell in row:
                 line += cell + " "
             print(line)
+
+        time.sleep(1)
 
 class Game:
     def __init__(self):
